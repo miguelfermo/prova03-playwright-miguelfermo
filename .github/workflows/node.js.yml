@@ -19,7 +19,7 @@ jobs:
       with:
         node-version: 22
         cache: 'npm'      
-    - run: npm install 
+    - run: npm install  
     - run: npx playwright install      
     - run: npm run actions  
       env:
