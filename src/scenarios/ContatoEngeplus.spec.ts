@@ -66,13 +66,13 @@ test.describe('Formulário de contato Engeplus', () => {
     const telefone = '(47) 99999-9999';
     const mensagem = 'Esta é uma mensagem de teste usando ZeroStep AI';
 
-    // Usando ZeroStep AI para selecionar a opção
-    await ai(
-      'Clique no menu de seleção e escolha a opção "Engeplus Datacenter"',
-      aiArgs
-    );
+    // Selecionar opção usando Page Object
+    await engeplusPage.selecionarOpcao('Engeplus Datacenter');
 
-    // Usando Page Object para preencher os campos (mais confiável)
+    // Usando ZeroStep AI para verificar que a página está correta antes de preencher
+    await ai('Verificar que o formulário de contato está visível', aiArgs);
+
+    // Preencher os campos
     await engeplusPage.preencherNome(nome);
     await engeplusPage.preencherEmail(email);
     await engeplusPage.preencherTelefone(telefone);
@@ -81,5 +81,8 @@ test.describe('Formulário de contato Engeplus', () => {
     // Validação usando a page object
     await engeplusPage.validarCamposPreenchidos();
     await engeplusPage.validarOpcaoSelecionada('Engeplus Datacenter');
+
+    // Usando ZeroStep AI para validação final
+    await ai('Verificar que todos os campos do formulário estão preenchidos', aiArgs);
   });
 });
