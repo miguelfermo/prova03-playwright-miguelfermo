@@ -61,19 +61,22 @@ test.describe('Formulário de contato Engeplus', () => {
     );
 
     const aiArgs = { page, test };
+    const nome = 'Miguel Teste AI';
+    const email = 'miguel.teste@engeplus.com';
+    const telefone = '(47) 99999-9999';
+    const mensagem = 'Esta é uma mensagem de teste usando ZeroStep AI';
 
-    // Usando ZeroStep AI para interagir com o formulário
-    await ai('Selecionar a opção "Engeplus Datacenter"', aiArgs);
-    await ai('Preencher o campo nome com "Miguel Teste AI"', aiArgs);
+    // Usando ZeroStep AI para selecionar a opção
     await ai(
-      'Preencher o campo email com "miguel.teste@engeplus.com"',
+      'Clique no menu de seleção e escolha a opção "Engeplus Datacenter"',
       aiArgs
     );
-    await ai('Preencher o campo telefone com "(47) 99999-9999"', aiArgs);
-    await ai(
-      'Preencher o campo mensagem com "Esta é uma mensagem de teste usando ZeroStep AI"',
-      aiArgs
-    );
+
+    // Usando Page Object para preencher os campos (mais confiável)
+    await engeplusPage.preencherNome(nome);
+    await engeplusPage.preencherEmail(email);
+    await engeplusPage.preencherTelefone(telefone);
+    await engeplusPage.preencherMensagem(mensagem);
 
     // Validação usando a page object
     await engeplusPage.validarCamposPreenchidos();
